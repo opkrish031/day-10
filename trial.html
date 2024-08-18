@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+       .container {
+    position: relative;
+    width: 50px;
+}
+
+.plus-button {
+    width: 50px;
+    height: 50px;
+    font-size: 24px;
+    cursor: pointer;
+    border: none;
+    background-color: #333;
+    color: white;
+    border-radius: 50%;
+}
+
+.color-options {
+    position: absolute;
+    top: 60px;
+    left: 0;
+    width: 50px;
+    overflow: hidden;
+    max-height: 0;
+    transition: max-height 0.5s ease;
+    z-index: 10;
+}
+
+.color {
+    width: 50px;
+    height: 50px;
+    margin-top: 5px;
+    border-radius: 5px;
+}
+
+.red {
+    background-color: red;
+}
+
+.green {
+    background-color: green;
+}
+
+.blue {
+    background-color: blue;
+}
+
+.color-options.show {
+    max-height: 180px;
+}
+.notes-container {
+    margin-top: 20px;
+}
+
+.note {
+    width: 200px;
+    height: 200px;
+    margin: 10px 0;
+    padding: 10px;
+    color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <button class="plus-button" id="plusButton">+</button>
+        <div class="color-options" id="colorOptions">
+            <div class="color red" data-color="red"></div>
+            <div class="color green" data-color="green"></div>
+            <div class="color blue" data-color="blue"></div>
+        </div>
+        <div class="notes-container" id="notesContainer"></div>
+    </div>
+    
+    
+    
+</body>
+<script>
+document.getElementById("plusButton").addEventListener("click", function() {
+    const colorOptions = document.getElementById("colorOptions");
+    colorOptions.classList.toggle("show");
+});
+
+document.querySelectorAll('.color').forEach(function(colorElement) {
+    colorElement.addEventListener('click', function() {
+        const color = this.getAttribute('data-color');
+        createNote(color);
+    });
+});
+
+function createNote(color) {
+    const note = document.createElement('div');
+    note.classList.add('note');
+    note.style.backgroundColor = color;
+
+    const noteContent = document.createElement('p');
+    noteContent.innerText = `This is a ${color} note.`;
+
+    note.appendChild(noteContent);
+
+    const notesContainer = document.getElementById('notesContainer');
+    notesContainer.appendChild(note);
+}
+
+
+
+</script>
+</html>
